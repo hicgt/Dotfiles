@@ -269,7 +269,68 @@
              '("melpa" . "http://melpa.org/packages/") t)
 
 (custom-set-variables
- '(package-selected-packages (quote (magit))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (auctex auto-package-update auto-complete-auctex auto-complete doom-themes all-the-icons neotree magit))))
 
 (global-set-key (kbd "C-x g") 'magit-status)
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(require 'sublimity)
+(require 'sublimity-scroll)
+(require 'sublimity-map) ;; experimental
+(require 'sublimity-attractive)
+
+(sublimity-mode 1)
+(setq sublimity-scroll-weight 5
+      sublimity-scroll-drift-length 10)
+(setq sublimity-map-size 20)
+(setq sublimity-map-fraction 0.3)
+(setq sublimity-map-text-scale -7)
+(add-hook 'sublimity-map-setup-hook
+          (lambda ()
+            (setq buffer-face-mode-face '(:family "Monospace"))
+            (buffer-face-mode)))
+(sublimity-map-set-delay 5)
+
+(require 'auto-package-update)
+
+(require 'all-the-icons)
+
+(require 'neotree)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
+(require 'doom-themes)
+
+;; Global settings (defaults)
+(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+      doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
+;; may have their own settings.
+(load-theme 'doom-one t)
+
+;; Enable flashing mode-line on errors
+(doom-themes-visual-bell-config)
+
+;; Enable custom neotree theme (all-the-icons must be installed!)
+(doom-themes-neotree-config)
+;; or for treemacs users
+(doom-themes-treemacs-config)
+
+;; Corrects (and improves) org-mode's native fontification.
+(doom-themes-org-config)
+
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil)
